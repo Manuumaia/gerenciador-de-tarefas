@@ -12,7 +12,7 @@ public class Main {
             int opcao = Utilidades.imprimirMenuPrincipal(nome_usuario,input);
 
             if (opcao == 1) {
-                String titulo, descricao, dia, mes, ano;
+                String titulo, descricao, data;
                 boolean loop = true;
 
                 while (loop) {
@@ -26,37 +26,17 @@ public class Main {
 
                             if (!descricao.isEmpty()) {
                                 while (loop) {
-                                    System.out.println("Informe o ano da data limite:");
-                                    ano = input.next();
+                                    System.out.println("Informe a data limite (dd-MM-yyyy):");
+                                    data = input.nextLine();
 
-                                    if (Utilidades.IsInteger(ano) && Integer.parseInt(ano) > 0) {
-                                        while (loop) {
-                                            System.out.println("Informe o mês da data limite:");
-                                            mes = input.next();
-
-                                            if (Utilidades.IsInteger(mes) && Integer.parseInt(mes) > 0) {
-                                                while (loop) {
-                                                    System.out.println("Informe o dia da data limite:");
-                                                    dia = input.next();
-
-                                                    if (Utilidades.IsInteger(dia) && Integer.parseInt(dia) > 0) {
-                                                        Classes.Tarefa nova_tarefa = new Classes.Tarefa(titulo, descricao);
-                                                        nova_tarefa.setDataLimite(Utilidades.formatarData(dia, mes, ano));
-                                                        nova_tarefa.cadastrarTarefa();
-                                                        loop = false;
-                                                    }
-                                                    else {
-                                                        System.out.println("Erro! Dia inválido.");
-                                                    }
-                                                }
-                                            }
-                                            else {
-                                                System.out.println("Erro! Mês inválido.");
-                                            }
-                                        }
+                                    if (Utilidades.isDate(data)) {
+                                        Classes.Tarefa nova_tarefa = new Classes.Tarefa(titulo, descricao);
+                                        nova_tarefa.setDataLimite(data);
+                                        nova_tarefa.cadastrarTarefa();
+                                        loop = false;
                                     }
                                     else {
-                                        System.out.println("Erro! Ano inválido.");
+                                        System.out.println("Erro! Data inválida");
                                     }
                                 }
                             }

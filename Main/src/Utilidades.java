@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,7 +40,7 @@ public class Utilidades {
             }
         }
 
-        System.out.println("---------------------------------------------------------\n");
+        System.out.println("-------------------------------------------------------------------------------\n");
         System.out.println("O que deseja fazer?");
         System.out.println("[1] Criar uma tarefa");
         System.out.println("[2] Modificar uma tarefa");
@@ -50,12 +53,14 @@ public class Utilidades {
         return input.nextInt();
     }
 
-    public static boolean IsInteger(String numero) {
+    public static boolean isDate(String data) {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
         try {
-            Integer.parseInt(numero);
+            LocalDate.parse(data, formato);
             return true;
         }
-        catch (NumberFormatException e) {
+        catch (DateTimeParseException e) {
             return false;
         }
     }
