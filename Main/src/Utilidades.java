@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Utilidades {
     private static boolean verificarSeVazia(ArrayList<Classes.Tarefa> lista_tarefas) {
-        return lista_tarefas.size() == 0;
+        return lista_tarefas.isEmpty();
     }
 
     public static int imprimirMenuPrincipal(String nome_usuario, Scanner input) {
@@ -46,6 +46,19 @@ public class Utilidades {
         System.out.println("======================================\n");
         System.out.println("Digite o número da opção escolhida:");
 
+        return input.nextInt();
+    }
+
+    public static int imprimirMenuEdicao (Scanner input) {
+        System.out.println();
+        System.out.println("O que deseja editar?");
+        System.out.println("[1] Título");
+        System.out.println("[2] Descrição");
+        System.out.println("[3] Data limite");
+        System.out.println("[4] Status");
+        System.out.println("[5] Voltar");
+
+        System.out.println("Digite o número da opção escolhida:");
         return input.nextInt();
     }
 

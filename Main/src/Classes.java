@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Classes {
     public static class Tarefa {
@@ -37,8 +38,16 @@ public class Classes {
             return this.titulo;
         }
 
+        public void setTitulo(String novo_titulo) {
+            this.titulo = novo_titulo;
+        }
+
         public String getDescricao() {
             return this.descricao;
+        }
+
+        public void setDescricao(String nova_descricao) {
+            this.descricao = nova_descricao;
         }
 
         public LocalDate getData_criacao() {
@@ -58,6 +67,10 @@ public class Classes {
             return this.status;
         }
 
+        public void setStatus(boolean novo_status) {
+            this.status = novo_status;
+        }
+
         public void cadastrarTarefa() {
             if (encontrarTarefa(this.titulo) == null) {
                 lista_tarefas.add(this);
@@ -70,6 +83,114 @@ public class Classes {
 
         public void excluirTarefa() {
             lista_tarefas.remove(this);
+        }
+
+        public void editarTarefa(int atributo, Scanner input) {
+            if (atributo == 1) {
+                System.out.println("Digite o novo título:");
+                String novo_titulo = input.nextLine();
+
+                if (!novo_titulo.isEmpty()) {
+                    while (true) {
+                        System.out.println("Tem certeza que deseja alterar o título desta tarefa? (s/n)");
+                        String confirmacao = input.next().toLowerCase();
+
+                        if (confirmacao.equals("s")) {
+                            setTitulo(novo_titulo);
+                            break;
+                        }
+                        else if (confirmacao.equals("n")) {
+                            break;
+                        }
+                        else {
+                            System.out.println("Comando inválido");
+                            break;
+                        }
+                    }
+                }
+                else {
+                    System.out.println("Erro! Título não pode ser vazio");
+                }
+            }
+
+            else if (atributo == 2) {
+                System.out.println("Digite a nova descrição:");
+                String nova_descricao = input.nextLine();
+
+                if (!nova_descricao.isEmpty()) {
+                    while (true) {
+                        System.out.println("Tem certeza que deseja alterar a descrição desta tarefa? (s/n)");
+                        String confirmacao = input.next().toLowerCase();
+
+                        if (confirmacao.equals("s")) {
+                            setDescricao(nova_descricao);
+                            break;
+                        }
+                        else if (confirmacao.equals("n")) {
+                            break;
+                        }
+                        else {
+                            System.out.println("Comando inválido");
+                            break;
+                        }
+                    }
+                }
+                else {
+                    System.out.println("Erro! Descrição não pode ser vazia.");
+                }
+            }
+
+            else if (atributo == 3) {
+                System.out.println("Digite a nova data limite (dd-MM-yyyy):");
+                String nova_data = input.nextLine();
+
+                if (Utilidades.isDate(nova_data)) {
+                    while (true) {
+                        System.out.println("Tem certeza que deseja alterar a data limite desta tarefa? (s/n)");
+                        String confirmacao = input.next().toLowerCase();
+
+                        if (confirmacao.equals("s")) {
+                            setDataLimite(nova_data);
+                            break;
+                        }
+                        else if (confirmacao.equals("n")) {
+                            break;
+                        }
+                        else {
+                            System.out.println("Comando inválido");
+                            break;
+                        }
+                    }
+                }
+                else {
+                    System.out.println("Erro! Data inválida");
+                }
+            }
+
+            else if (atributo == 4) {
+                while (true) {
+                    System.out.println("Tem certeza que deseja alterar o status desta tarefa? (s/n)");
+                    String confirmacao = input.next().toLowerCase();
+
+                    if (confirmacao.equals("s")) {
+                        if (this.status == false) {
+                            setStatus(true);
+                            break;
+                        }
+                        else {
+                            setStatus(false);
+                            break;
+                        }
+                    }
+                    else if (confirmacao.equals("n")) {
+                        break;
+                    }
+                    else {
+                        System.out.println("Comando inválido");
+                        break;
+                    }
+                }
+            }
         }
     }
 }

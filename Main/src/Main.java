@@ -3,13 +3,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        String nome_usuario;
 
         System.out.println("Bem-vindo! Qual é o seu nome?");
-        nome_usuario = input.next();
+        String nome_usuario = input.nextLine();
 
         do {
-            int opcao = Utilidades.imprimirMenuPrincipal(nome_usuario,input);
+            int opcao = Utilidades.imprimirMenuPrincipal(nome_usuario, input);
+            input.nextLine();
 
             if (opcao == 1) {
                 String titulo, descricao, data;
@@ -51,12 +51,47 @@ public class Main {
                 }
             }
 
-            else if (opcao == 3) {
-                String titulo;
+            else if (opcao == 2) {
+                boolean loop = true;
 
+                while (loop) {
+                    System.out.println("Digite o título da tarefa que deseja editar:");
+                    String titulo = input.nextLine();
+
+                    if (!titulo.isEmpty()) {
+                        Classes.Tarefa tarefa = Classes.Tarefa.encontrarTarefa(titulo);
+
+                        if (tarefa == null) {
+                            System.out.println("Não há registro.");
+                        }
+                        else {
+                            while (loop) {
+                                int opcao_edicao = Utilidades.imprimirMenuEdicao(input);
+                                input.nextLine();
+
+                                if (opcao_edicao > 0 && opcao_edicao < 5)  {
+                                    tarefa.editarTarefa(opcao_edicao, input);
+                                    loop = false;
+                                }
+                                else if (opcao_edicao == 5) {
+                                    loop = false;
+                                }
+                                else {
+                                    System.out.println("Comando inválido");
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        System.out.println("Erro! Título não pode ser vazio");
+                    }
+                }
+            }
+
+            else if (opcao == 3) {
                 while (true) {
                     System.out.println("Digite o título da tarefa que deseja remover:");
-                    titulo = input.nextLine();
+                    String titulo = input.nextLine();
 
                     if (!titulo.isEmpty()) {
                         Classes.Tarefa tarefa = Classes.Tarefa.encontrarTarefa(titulo);
