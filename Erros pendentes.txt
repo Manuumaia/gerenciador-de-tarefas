@@ -1,1 +1,0 @@
-- O programa permite inserir uma tarefa cujo a data limite é menor que a data de criação;
