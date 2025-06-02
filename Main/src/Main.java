@@ -12,6 +12,14 @@ public class Main {
 
         do {
             opcao = Utilidades.imprimirMenuPrincipal(nome_usuario,input);
+
+            switch (opcao) {
+                case 5:
+                    System.out.println();
+                    System.out.println("Até mais!");
+                    loop = false;
+
+            }
         } while (loop);
     }
 }

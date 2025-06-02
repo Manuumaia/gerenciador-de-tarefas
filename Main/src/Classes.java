@@ -3,18 +3,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Classes {
-    public class Usuario {
-        private String nome;
-
-        public Usuario(String nome) {
-            this.nome = nome;
-        }
-
-        public String getNome() {
-            return this.nome;
-        }
-    }
-
     public class Tarefa {
         private static ArrayList<Tarefa> lista_tarefas = new ArrayList<>();
 
