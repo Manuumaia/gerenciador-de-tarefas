@@ -51,9 +51,35 @@ public class Main {
                 }
             }
 
+            else if (opcao == 3) {
+                String titulo;
+
+                while (true) {
+                    System.out.println("Digite o título da tarefa que deseja remover:");
+                    titulo = input.nextLine();
+
+                    if (!titulo.isEmpty()) {
+                        Classes.Tarefa tarefa = Classes.Tarefa.encontrarTarefa(titulo);
+
+                        if (tarefa == null) {
+                            System.out.println("Não há registro da tarefa");
+                            break;
+                        }
+                        else {
+                            tarefa.excluirTarefa();
+                            break;
+                        }
+                    }
+                    else {
+                        System.out.println("Erro! Título não pode ser vazio");
+                    }
+                }
+            }
+
             else if (opcao == 5) {
                 System.out.println();
                 System.out.println("Até mais!");
+                input.close();
                 break;
             }
 

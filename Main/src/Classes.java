@@ -23,6 +23,16 @@ public class Classes {
             return lista_tarefas;
         }
 
+        public static Tarefa encontrarTarefa(String titulo) {
+            for (Tarefa tarefa : lista_tarefas) {
+                if (tarefa.titulo.equalsIgnoreCase(titulo)) {
+                    return tarefa;
+                }
+            }
+
+            return null;
+        }
+
         public String getTitulo() {
             return this.titulo;
         }
@@ -49,7 +59,17 @@ public class Classes {
         }
 
         public void cadastrarTarefa() {
-            lista_tarefas.add(this);
+            if (encontrarTarefa(this.titulo) == null) {
+                lista_tarefas.add(this);
+            }
+            else {
+                System.out.println();
+                System.out.println("Tarefa já cadastrada.");
+            }
+        }
+
+        public void excluirTarefa() {
+            lista_tarefas.remove(this);
         }
     }
 }

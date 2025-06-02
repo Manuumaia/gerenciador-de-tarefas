@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Utilidades {
-    public static String formatarData(String dia, String mes, String ano) {
-        return (dia + "-" + mes + "-" + ano);
-    }
-
     private static boolean verificarSeVazia(ArrayList<Classes.Tarefa> lista_tarefas) {
         return lista_tarefas.size() == 0;
     }
