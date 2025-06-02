@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Classes {
-    public class Tarefa {
+    public static class Tarefa {
         private static ArrayList<Tarefa> lista_tarefas = new ArrayList<>();
 
         private String titulo;

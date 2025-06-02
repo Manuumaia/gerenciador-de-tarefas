@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Utilidades {
-    public static String formatarData(int dia, int mes, int ano) {
+    public static String formatarData(String dia, String mes, String ano) {
         return (dia + "-" + mes + "-" + ano);
     }
 
@@ -20,15 +20,17 @@ public class Utilidades {
             System.out.println("Não há tarefas registradas.");
         }
         else {
-            System.out.printf("%-4s %-15s %-15s %-15s %-10s%n", "Nº", "Título", "Data Criação", "Data Limite", "Status");
-            System.out.println("---------------------------------------------------------");
+            System.out.printf("%-4s %-15s %-15s %-15s %-15s %-10s%n",
+                    "Nº", "Título", "Descrição", "Data Criação", "Data Limite", "Status");
+            System.out.println("-------------------------------------------------------------------------------");
 
             int contador = 1;
             for (Classes.Tarefa tarefa : Classes.Tarefa.getListaTarefas()) {
                 String statusStr = tarefa.getStatus() ? "Concluído" : "Pendente";
-                System.out.printf("%-4d %-15s %-15s %-15s %-10s%n",
+                System.out.printf("%-4d %-15s %-15s %-15s %-15s %-10s%n",
                         contador++,
                         tarefa.getTitulo(),
+                        tarefa.getDescricao(),
                         tarefa.getData_criacao().toString(),
                         tarefa.getData_limite().toString(),
                         statusStr);
@@ -46,5 +48,15 @@ public class Utilidades {
         System.out.println("Digite o número da opção escolhida:");
 
         return input.nextInt();
+    }
+
+    public static boolean IsInteger(String numero) {
+        try {
+            Integer.parseInt(numero);
+            return true;
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
