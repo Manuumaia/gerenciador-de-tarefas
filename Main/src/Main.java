@@ -29,7 +29,7 @@ public class Main {
 
                             if (!descricao.isEmpty()) {
                                 while (loop) {
-                                    System.out.println("Informe a data limite (dd-MM-yyyy):");
+                                    System.out.println("Informe a data limite (dd/MM/yyyy):");
                                     data = input.nextLine();
 
                                     if (Utilidades.isDate(data)) {

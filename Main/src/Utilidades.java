@@ -15,9 +15,6 @@ public class Utilidades {
             if (!filtro) {
                 System.out.println("Não há tarefas registradas.");
             }
-            else {
-                System.out.println("Não há tarefas que correspondam ao filtro selecionado\n");
-            }
         }
 
         else {
@@ -79,7 +76,7 @@ public class Utilidades {
     }
 
     public static boolean isDate(String data) {
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         try {
             LocalDate.parse(data, formato);
@@ -90,14 +87,14 @@ public class Utilidades {
         }
     }
 
-    public static int imprimirMenuSelecao_data(Scanner input) {
+    public static String imprimirMenuSelecao_data(Scanner input) {
         System.out.println("[1] Dia");
         System.out.println("[2] Mês");
         System.out.println("[3] Ano");
         System.out.println("[4] Voltar");
 
         System.out.println("Digite o número da opção escolhida:");
-        return input.nextInt();
+        return input.nextLine();
     }
 
     public static String imprimirMenuSelecao_status(Scanner input) {
@@ -116,5 +113,10 @@ public class Utilidades {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public static LocalDate toDate(String data) {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(data, formato);
     }
 }

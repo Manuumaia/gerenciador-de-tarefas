@@ -43,16 +43,6 @@ public class Tarefa {
         return null;
     }
 
-    public static Tarefa encontrarTarefa_status(Boolean status) {
-        for (Tarefa tarefa : lista_tarefas) {
-            if (tarefa.status == status) {
-                return tarefa;
-            }
-        }
-
-        return null;
-    }
-
     public static ArrayList<Tarefa> filtrarListaTarefas(int atributo, Scanner input) {
         ArrayList<Tarefa> lista_filtrada = new ArrayList<>();
 
@@ -92,6 +82,37 @@ public class Tarefa {
                 }
                 else {
                     System.out.println("Erro! Descrição não pode ser vazia");
+                }
+            }
+        }
+
+        else if (atributo == 3 || atributo == 4) {
+            while (true) {
+                System.out.println("Digite a data (dd/MM/yyyy)");
+                String dataStr = input.nextLine();
+
+                if (Utilidades.isDate(dataStr)) {
+                    LocalDate data = Utilidades.toDate(dataStr);
+
+                    if (atributo == 3) {
+                        for (Tarefa tarefa : lista_tarefas) {
+                            if (tarefa.data_criacao.equals(data)) {
+                                lista_filtrada.add(tarefa);
+                            }
+                        }
+                    }
+
+                    else {
+                        for (Tarefa tarefa : lista_tarefas) {
+                            if (tarefa.data_limite.equals(data)) {
+                                lista_filtrada.add(tarefa);
+                            }
+                        }
+                    }
+                    break;
+                }
+                else {
+                    System.out.println("Erro! Data inválida.");
                 }
             }
         }
@@ -169,7 +190,7 @@ public class Tarefa {
     }
 
     public void setDataLimite(String data_limite) {
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.data_limite = LocalDate.parse(data_limite, formato);
     }
 
@@ -251,7 +272,7 @@ public class Tarefa {
         }
 
         else if (atributo == 3) {
-            System.out.println("Digite a nova data limite (dd-MM-yyyy):");
+            System.out.println("Digite a nova data limite (dd/MM/yyyy):");
             String nova_data = input.nextLine();
 
             if (Utilidades.isDate(nova_data)) {
@@ -283,7 +304,7 @@ public class Tarefa {
                 String confirmacao = input.next().toLowerCase();
 
                 if (confirmacao.equals("s")) {
-                    if (this.status == false) {
+                    if (!this.status) {
                         setStatus(true);
                         break;
                     }
