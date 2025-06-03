@@ -30,7 +30,7 @@ public class Main {
                                     data = input.nextLine();
 
                                     if (Utilidades.isDate(data)) {
-                                        Classes.Tarefa nova_tarefa = new Classes.Tarefa(titulo, descricao);
+                                        Tarefa nova_tarefa = new Tarefa(titulo, descricao);
                                         nova_tarefa.setDataLimite(data);
                                         nova_tarefa.cadastrarTarefa();
                                         loop = false;
@@ -59,7 +59,7 @@ public class Main {
                     String titulo = input.nextLine();
 
                     if (!titulo.isEmpty()) {
-                        Classes.Tarefa tarefa = Classes.Tarefa.encontrarTarefa(titulo);
+                        Tarefa tarefa = Tarefa.encontrarTarefa(titulo);
 
                         if (tarefa == null) {
                             System.out.println("Não há registro.");
@@ -94,7 +94,7 @@ public class Main {
                     String titulo = input.nextLine();
 
                     if (!titulo.isEmpty()) {
-                        Classes.Tarefa tarefa = Classes.Tarefa.encontrarTarefa(titulo);
+                        Tarefa tarefa = Tarefa.encontrarTarefa(titulo);
 
                         if (tarefa == null) {
                             System.out.println("Não há registro da tarefa");

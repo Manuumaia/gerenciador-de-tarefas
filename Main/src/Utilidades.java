@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Utilidades {
-    private static boolean verificarSeVazia(ArrayList<Classes.Tarefa> lista_tarefas) {
+    private static boolean verificarSeVazia(ArrayList<Tarefa> lista_tarefas) {
         return lista_tarefas.isEmpty();
     }
 
@@ -15,7 +15,7 @@ public class Utilidades {
         System.out.println("Bem vindo, " + nome_usuario + "!");
         System.out.println("Aqui está a sua lista de tarefas:");
 
-        if (verificarSeVazia(Classes.Tarefa.getListaTarefas())) {
+        if (verificarSeVazia(Tarefa.getListaTarefas())) {
             System.out.println("Não há tarefas registradas.");
         }
         else {
@@ -24,7 +24,7 @@ public class Utilidades {
             System.out.println("-------------------------------------------------------------------------------");
 
             int contador = 1;
-            for (Classes.Tarefa tarefa : Classes.Tarefa.getListaTarefas()) {
+            for (Tarefa tarefa : Tarefa.getListaTarefas()) {
                 String statusStr = tarefa.getStatus() ? "Concluído" : "Pendente";
                 System.out.printf("%-4d %-15s %-15s %-15s %-15s %-10s%n",
                         contador++,
