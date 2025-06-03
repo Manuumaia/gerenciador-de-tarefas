@@ -99,4 +99,22 @@ public class Utilidades {
         System.out.println("Digite o número da opção escolhida:");
         return input.nextInt();
     }
+
+    public static String imprimirMenuSelecao_status(Scanner input) {
+        System.out.println("[1] Concluído");
+        System.out.println("[2] Pendente");
+        System.out.println("[3] Voltar");
+
+        System.out.println("Digite o número da opção escolhida:");
+        return input.nextLine();
+    }
+
+    public static boolean isInt(String numero) {
+        try {
+            Integer.parseInt(numero);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }

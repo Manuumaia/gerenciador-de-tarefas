@@ -43,6 +43,16 @@ public class Tarefa {
         return null;
     }
 
+    public static Tarefa encontrarTarefa_status(Boolean status) {
+        for (Tarefa tarefa : lista_tarefas) {
+            if (tarefa.status == status) {
+                return tarefa;
+            }
+        }
+
+        return null;
+    }
+
     public static ArrayList<Tarefa> filtrarListaTarefas(int atributo, Scanner input) {
         ArrayList<Tarefa> lista_filtrada = new ArrayList<>();
 
@@ -82,6 +92,46 @@ public class Tarefa {
                 }
                 else {
                     System.out.println("Erro! Descrição não pode ser vazia");
+                }
+            }
+        }
+
+        else if (atributo == 5) {
+            while (true) {
+                System.out.println("Selecione o status:");
+                String escolha = Utilidades.imprimirMenuSelecao_status((input));
+
+                if (Utilidades.isInt(escolha)) {
+                    int escolhaInt = Integer.parseInt(escolha);
+
+                    if (escolhaInt == 1 || escolhaInt == 2) {
+                        if (escolhaInt == 1) {
+                            for (Tarefa tarefa : lista_tarefas) {
+                                if (tarefa.status) {
+                                    lista_filtrada.add(tarefa);
+                                }
+                            }
+                        }
+                        else {
+                            for (Tarefa tarefa : lista_tarefas) {
+                                if (!tarefa.status) {
+                                    lista_filtrada.add(tarefa);
+                                }
+                            }
+                        }
+                    }
+                    else if (escolhaInt == 3) {
+                        return null;
+                    }
+                    else {
+                        System.out.println("Erro! Opção inválida");
+                    }
+
+                    break;
+
+                }
+                else {
+                    System.out.println("Erro! Opção inválida");
                 }
             }
         }
