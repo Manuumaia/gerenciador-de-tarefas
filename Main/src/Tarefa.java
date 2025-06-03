@@ -23,7 +23,7 @@ public class Tarefa {
         return lista_tarefas;
     }
 
-    public static Tarefa encontrarTarefa(String titulo) {
+    public static Tarefa encontrarTarefa_titulo(String titulo) {
         for (Tarefa tarefa : lista_tarefas) {
             if (tarefa.titulo.equalsIgnoreCase(titulo)) {
                 return tarefa;
@@ -31,6 +31,67 @@ public class Tarefa {
         }
 
         return null;
+    }
+
+    public static Tarefa encontrarTarefa_descricao(String descricao) {
+        for (Tarefa tarefa : lista_tarefas) {
+            if (tarefa.descricao.equalsIgnoreCase(descricao)) {
+                return tarefa;
+            }
+        }
+
+        return null;
+    }
+
+    public static ArrayList<Tarefa> filtrarListaTarefas(int atributo, Scanner input) {
+        ArrayList<Tarefa> lista_filtrada = new ArrayList<>();
+
+        if (atributo == 1) {
+            while (true) {
+                System.out.println("Digite o título da tarefa:");
+                String titulo = input.nextLine();
+
+                if (!titulo.isEmpty()) {
+                    Tarefa tarefa = encontrarTarefa_titulo(titulo);
+
+                    if (tarefa != null) {
+                        lista_filtrada.add(tarefa);
+                    };
+
+                    break;
+                }
+                else {
+                    System.out.println("Erro! Título não pode ser vazio");
+                }
+            }
+        }
+
+        else if (atributo == 2) {
+            while (true) {
+                System.out.println("Digite a descrição da tarefa:");
+                String descricao = input.nextLine();
+
+                if (!descricao.isEmpty()) {
+                    Tarefa tarefa = encontrarTarefa_descricao(descricao);
+
+                    if (tarefa != null) {
+                        lista_filtrada.add(tarefa);
+                    }
+
+                    break;
+                }
+                else {
+                    System.out.println("Erro! Descrição não pode ser vazia");
+                }
+            }
+        }
+
+        if (lista_filtrada.isEmpty()) {
+            System.out.println("Não há tarefas que correspondam ao filtro.\n");
+            return null;
+        }
+
+        return lista_filtrada;
     }
 
     public String getTitulo() {
@@ -71,7 +132,7 @@ public class Tarefa {
     }
 
     public void cadastrarTarefa() {
-        if (encontrarTarefa(this.titulo) == null) {
+        if (encontrarTarefa_titulo(this.titulo) == null) {
             lista_tarefas.add(this);
         }
         else {

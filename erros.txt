@@ -1,0 +1,3 @@
+O programa permite que uma tarefa cujo a data limite é menor que a data de criação;
+O programa aceita strings com apenas espaços em título e descrição;
+O programa permite selecionar "modificar" e "excluir" mesmo com a lista vazia;

@@ -1,14 +1,17 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        ArrayList<Tarefa> lista_tarefas = Tarefa.getListaTarefas();
+        boolean filtro = false;
 
         System.out.println("Bem-vindo! Qual é o seu nome?");
         String nome_usuario = input.nextLine();
 
         do {
-            int opcao = Utilidades.imprimirMenuPrincipal(nome_usuario, input);
+            int opcao = Utilidades.imprimirMenuPrincipal(nome_usuario, lista_tarefas, filtro, input);
             input.nextLine();
 
             if (opcao == 1) {
@@ -59,14 +62,18 @@ public class Main {
                     String titulo = input.nextLine();
 
                     if (!titulo.isEmpty()) {
-                        Tarefa tarefa = Tarefa.encontrarTarefa(titulo);
+                        Tarefa tarefa = Tarefa.encontrarTarefa_titulo(titulo);
 
                         if (tarefa == null) {
                             System.out.println("Não há registro.");
                         }
                         else {
                             while (loop) {
-                                int opcao_edicao = Utilidades.imprimirMenuEdicao(input);
+                                int opcao_edicao;
+
+                                System.out.println();
+                                System.out.println("O que deseja editar?");
+                                opcao_edicao = Utilidades.imprimirMenuSelecao(input, "modificar");
                                 input.nextLine();
 
                                 if (opcao_edicao > 0 && opcao_edicao < 5)  {
@@ -94,7 +101,7 @@ public class Main {
                     String titulo = input.nextLine();
 
                     if (!titulo.isEmpty()) {
-                        Tarefa tarefa = Tarefa.encontrarTarefa(titulo);
+                        Tarefa tarefa = Tarefa.encontrarTarefa_titulo(titulo);
 
                         if (tarefa == null) {
                             System.out.println("Não há registro da tarefa");
@@ -108,6 +115,35 @@ public class Main {
                     else {
                         System.out.println("Erro! Título não pode ser vazio");
                     }
+                }
+            }
+
+            else if (opcao == 4) {
+                if (!filtro) {
+                    while (true) {
+                        int opcao_filtro;
+
+                        System.out.println();
+                        System.out.println("Selecione o critério do filtro");
+                        opcao_filtro = Utilidades.imprimirMenuSelecao(input, "filtrar");
+                        input.nextLine();
+
+                        if (opcao_filtro > 0 && opcao_filtro < 6)  {
+                            lista_tarefas = Tarefa.filtrarListaTarefas(opcao_filtro, input);
+                            filtro = true;
+                            break;
+                        }
+                        else if (opcao_filtro == 6) {
+                            break;
+                        }
+                        else {
+                            System.out.println("Comando inválido");
+                        }
+                    }
+                }
+                else {
+                    lista_tarefas = Tarefa.getListaTarefas();
+                    filtro = false;
                 }
             }
 
