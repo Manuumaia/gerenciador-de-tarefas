@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Utilidades {
+    public static String formatarData(LocalDate data) {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return data.format(formato);
+    }
+
     public static int imprimirMenuPrincipal(String nome_usuario, ArrayList<Tarefa> lista, boolean filtro, Scanner input) {
         System.out.println();
         System.out.println("MENU PRINCIPAL");
@@ -29,8 +34,8 @@ public class Utilidades {
                         contador++,
                         tarefa.getTitulo(),
                         tarefa.getDescricao(),
-                        tarefa.getData_criacao().toString(),
-                        tarefa.getData_limite().toString(),
+                        formatarData(tarefa.getData_criacao()),
+                        formatarData(tarefa.getData_limite()),
                         statusStr);
             }
         }
