@@ -7,16 +7,20 @@ import java.util.Scanner;
 public class Utilidades {
     public static int imprimirMenuPrincipal(String nome_usuario, ArrayList<Tarefa> lista, boolean filtro, Scanner input) {
         System.out.println();
+
+        //Inicia Menu Princial
         System.out.println("MENU PRINCIPAL");
         System.out.println("Bem vindo, " + nome_usuario + "!");
         System.out.println("Aqui está a sua lista de tarefas:\n");
 
+        // Caso a lista esteja vazia
         if (lista.isEmpty()) {
             if (!filtro) {
                 System.out.println("Não há tarefas registradas.");
             }
         }
 
+        // Caso tenha tarefas, exibe cabeçalho
         else {
             System.out.printf("%-4s %-15s %-15s %-15s %-15s %-10s%n",
                     "Nº", "Título", "Descrição", "Data Criação", "Data Limite", "Status");
@@ -24,7 +28,10 @@ public class Utilidades {
 
             int contador = 1;
             for (Tarefa tarefa : lista) {
+                //Determina o status da Tarefa
                 String statusStr = tarefa.getStatus() ? "Concluído" : "Pendente";
+
+                // Imprime os dados formatados de cada tarefa
                 System.out.printf("%-4d %-15s %-15s %-15s %-15s %-10s%n",
                         contador++,
                         tarefa.getTitulo(),
@@ -35,12 +42,14 @@ public class Utilidades {
             }
         }
 
+        //Exibe Menu Principal
         System.out.println("-------------------------------------------------------------------------------\n");
         System.out.println("O que deseja fazer?");
         System.out.println("[1] Criar uma tarefa");
         System.out.println("[2] Modificar uma tarefa");
         System.out.println("[3] Excluir uma tarefa");
 
+        //Altera a opção 4 de acordo com a filtragem
         if (!filtro) {
             System.out.println("[4] Filtrar lista");
         }
@@ -55,6 +64,7 @@ public class Utilidades {
         return input.nextInt();
     }
 
+    // Exibe o menu de seleção para edição ou filtragem de tarefa
     public static int imprimirMenuSelecao (Scanner input, String tipo) {
         System.out.println("[1] Título");
         System.out.println("[2] Descrição");
@@ -75,6 +85,7 @@ public class Utilidades {
         return input.nextInt();
     }
 
+    // Verifica se uma string está em um formato de data válido (dd/MM/yyyy)
     public static boolean isDate(String data) {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -87,6 +98,7 @@ public class Utilidades {
         }
     }
 
+    // Menu auxiliar para selecionar partes de uma data
     public static String imprimirMenuSelecao_data(Scanner input) {
         System.out.println("[1] Dia");
         System.out.println("[2] Mês");
@@ -97,6 +109,7 @@ public class Utilidades {
         return input.nextLine();
     }
 
+    // Menu auxiliar para seleção de status da tarefa
     public static String imprimirMenuSelecao_status(Scanner input) {
         System.out.println("[1] Concluído");
         System.out.println("[2] Pendente");
@@ -106,6 +119,7 @@ public class Utilidades {
         return input.nextLine();
     }
 
+    // Verifica se a string recebida é um número inteiro válido
     public static boolean isInt(String numero) {
         try {
             Integer.parseInt(numero);
@@ -115,6 +129,7 @@ public class Utilidades {
         }
     }
 
+    // Converte uma string no formato dd/MM/yyyy para um objeto LocalDate
     public static LocalDate toDate(String data) {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return LocalDate.parse(data, formato);

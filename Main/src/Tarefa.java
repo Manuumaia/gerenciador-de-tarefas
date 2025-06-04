@@ -1,17 +1,21 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Classe principal que representa uma tarefa
 public class Tarefa {
+
+    // Lista estática onde todas as tarefas são armazenadas
     private static ArrayList<Tarefa> lista_tarefas = new ArrayList<>();
 
+    // Atributos da tarefa
     private String titulo;
     private String descricao;
     private LocalDate data_criacao;
     private LocalDate data_limite;
     private boolean status;
 
+    // Construtor com data limite
     public Tarefa(String titulo, String descricao, LocalDate data_limite) {
         this.titulo = titulo;
         this.descricao = descricao;
@@ -20,10 +24,12 @@ public class Tarefa {
         this.status = false;
     }
 
+    // Retorna a lista completa de tarefas
     public static ArrayList<Tarefa> getListaTarefas() {
         return lista_tarefas;
     }
 
+    // Busca uma tarefa pelo título
     public static Tarefa encontrarTarefa_titulo(String titulo) {
         for (Tarefa tarefa : lista_tarefas) {
             if (tarefa.titulo.equalsIgnoreCase(titulo)) {
@@ -34,6 +40,7 @@ public class Tarefa {
         return null;
     }
 
+    // Busca uma tarefa pela descrição
     public static Tarefa encontrarTarefa_descricao(String descricao) {
         for (Tarefa tarefa : lista_tarefas) {
             if (tarefa.descricao.equalsIgnoreCase(descricao)) {
@@ -44,9 +51,11 @@ public class Tarefa {
         return null;
     }
 
+    // Filtra a lista de tarefas
     public static ArrayList<Tarefa> filtrarListaTarefas(int atributo, Scanner input) {
         ArrayList<Tarefa> lista_filtrada = new ArrayList<>();
 
+        // Filtro por título
         if (atributo == 1) {
             while (true) {
                 System.out.println("Digite o título da tarefa:");
@@ -67,6 +76,7 @@ public class Tarefa {
             }
         }
 
+        // Filtro por descrição
         else if (atributo == 2) {
             while (true) {
                 System.out.println("Digite a descrição da tarefa:");
@@ -87,6 +97,7 @@ public class Tarefa {
             }
         }
 
+        // Filtro por data de criação ou data limite
         else if (atributo == 3 || atributo == 4) {
             while (true) {
                 System.out.println("Digite a data (dd/MM/yyyy)");
