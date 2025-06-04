@@ -98,7 +98,6 @@ public class Utilidades {
         }
     }
 
-    // Menu auxiliar para selecionar partes de uma data
     public static String imprimirMenuSelecao_data(Scanner input) {
         System.out.println("[1] Dia");
         System.out.println("[2] Mês");

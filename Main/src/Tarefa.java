@@ -61,7 +61,7 @@ public class Tarefa {
                 System.out.println("Digite o título da tarefa:");
                 String titulo = input.nextLine();
 
-                if (!titulo.isEmpty()) {
+                if (!titulo.isBlank()) {
                     Tarefa tarefa = encontrarTarefa_titulo(titulo);
 
                     if (tarefa != null) {
@@ -82,7 +82,7 @@ public class Tarefa {
                 System.out.println("Digite a descrição da tarefa:");
                 String descricao = input.nextLine();
 
-                if (!descricao.isEmpty()) {
+                if (!descricao.isBlank()) {
                     Tarefa tarefa = encontrarTarefa_descricao(descricao);
 
                     if (tarefa != null) {
@@ -236,7 +236,7 @@ public class Tarefa {
             System.out.println("Digite o novo título:");
             String novo_titulo = input.nextLine();
 
-            if (!novo_titulo.isEmpty()) {
+            if (!novo_titulo.isBlank()) {
                 while (true) {
                     System.out.println("Tem certeza que deseja alterar o título desta tarefa? (s/n)");
                     String confirmacao = input.next().toLowerCase();
@@ -263,7 +263,7 @@ public class Tarefa {
             System.out.println("Digite a nova descrição:");
             String nova_descricao = input.nextLine();
 
-            if (!nova_descricao.isEmpty()) {
+            if (!nova_descricao.isBlank()) {
                 while (true) {
                     System.out.println("Tem certeza que deseja alterar a descrição desta tarefa? (s/n)");
                     String confirmacao = input.next().toLowerCase();
