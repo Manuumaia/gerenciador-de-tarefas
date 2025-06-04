@@ -87,16 +87,6 @@ public class Utilidades {
         }
     }
 
-    public static String imprimirMenuSelecao_data(Scanner input) {
-        System.out.println("[1] Dia");
-        System.out.println("[2] Mês");
-        System.out.println("[3] Ano");
-        System.out.println("[4] Voltar");
-
-        System.out.println("Digite o número da opção escolhida:");
-        return input.nextLine();
-    }
-
     public static String imprimirMenuSelecao_status(Scanner input) {
         System.out.println("[1] Concluído");
         System.out.println("[2] Pendente");

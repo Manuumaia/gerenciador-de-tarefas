@@ -23,12 +23,12 @@ public class Main {
                     System.out.println("Informe o título da tarefa:");
                     titulo = input.nextLine();
 
-                    if (!titulo.isEmpty()) {
+                    if (!titulo.isBlank()) {
                         while (loop) {
                             System.out.println("Faça uma breve descrição da tarefa:");
                             descricao = input.nextLine();
 
-                            if (!descricao.isEmpty()) {
+                            if (!descricao.isBlank()) {
                                 while (loop) {
                                     System.out.println("Informe a data limite (dd/MM/yyyy):");
                                     dataStr = input.nextLine();
@@ -68,7 +68,7 @@ public class Main {
                     System.out.println("Digite o título da tarefa que deseja editar:");
                     String titulo = input.nextLine();
 
-                    if (!titulo.isEmpty()) {
+                    if (!titulo.isBlank()) {
                         Tarefa tarefa = Tarefa.encontrarTarefa_titulo(titulo);
 
                         if (tarefa == null) {
@@ -107,7 +107,7 @@ public class Main {
                     System.out.println("Digite o título da tarefa que deseja remover:");
                     String titulo = input.nextLine();
 
-                    if (!titulo.isEmpty()) {
+                    if (!titulo.isBlank()) {
                         Tarefa tarefa = Tarefa.encontrarTarefa_titulo(titulo);
 
                         if (tarefa == null) {
