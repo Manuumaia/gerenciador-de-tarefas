@@ -62,66 +62,76 @@ public class Main {
             }
 
             else if (opcao == 2) {
-                boolean loop = true;
+                if (!Tarefa.getListaTarefas().isEmpty()) {
+                    boolean loop = true;
 
-                while (loop) {
-                    System.out.println("Digite o título da tarefa que deseja editar:");
-                    String titulo = input.nextLine();
+                    while (loop) {
+                        System.out.println("Digite o título da tarefa que deseja editar:");
+                        String titulo = input.nextLine();
 
-                    if (!titulo.isBlank()) {
-                        Tarefa tarefa = Tarefa.encontrarTarefa_titulo(titulo);
+                        if (!titulo.isBlank()) {
+                            Tarefa tarefa = Tarefa.encontrarTarefa_titulo(titulo);
 
-                        if (tarefa == null) {
-                            System.out.println("Não há registro.");
-                        }
-                        else {
-                            while (loop) {
-                                int opcao_edicao;
+                            if (tarefa == null) {
+                                System.out.println("Não há registro.");
+                            }
+                            else {
+                                while (loop) {
+                                    int opcao_edicao;
 
-                                System.out.println();
-                                System.out.println("O que deseja editar?");
-                                opcao_edicao = Utilidades.imprimirMenuSelecao(input, "modificar");
-                                input.nextLine();
+                                    System.out.println();
+                                    System.out.println("O que deseja editar?");
+                                    opcao_edicao = Utilidades.imprimirMenuSelecao(input, "modificar");
+                                    input.nextLine();
 
-                                if (opcao_edicao > 0 && opcao_edicao < 5)  {
-                                    tarefa.editarTarefa(opcao_edicao, input);
-                                    loop = false;
-                                }
-                                else if (opcao_edicao == 5) {
-                                    loop = false;
-                                }
-                                else {
-                                    System.out.println("Comando inválido");
+                                    if (opcao_edicao > 0 && opcao_edicao < 5)  {
+                                        tarefa.editarTarefa(opcao_edicao, input);
+                                        loop = false;
+                                    }
+                                    else if (opcao_edicao == 5) {
+                                        loop = false;
+                                    }
+                                    else {
+                                        System.out.println("Comando inválido");
+                                    }
                                 }
                             }
                         }
+                        else {
+                            System.out.println("Erro! Título não pode ser vazio");
+                        }
                     }
-                    else {
-                        System.out.println("Erro! Título não pode ser vazio");
-                    }
+                }
+                else {
+                    System.out.println("Não há registros de tarefas.");
                 }
             }
 
             else if (opcao == 3) {
-                while (true) {
-                    System.out.println("Digite o título da tarefa que deseja remover:");
-                    String titulo = input.nextLine();
+                if (!Tarefa.getListaTarefas().isEmpty()) {
+                    while (true) {
+                        System.out.println("Digite o título da tarefa que deseja remover:");
+                        String titulo = input.nextLine();
 
-                    if (!titulo.isBlank()) {
-                        Tarefa tarefa = Tarefa.encontrarTarefa_titulo(titulo);
+                        if (!titulo.isBlank()) {
+                            Tarefa tarefa = Tarefa.encontrarTarefa_titulo(titulo);
 
-                        if (tarefa == null) {
-                            System.out.println("Não há registro da tarefa");
-                            break;
+                            if (tarefa == null) {
+                                System.out.println("Não há registro da tarefa");
+                                break;
+                            }
+                            else {
+                                tarefa.excluirTarefa();
+                                break;
+                            }
                         }
                         else {
-                            tarefa.excluirTarefa();
-                            break;
+                            System.out.println("Erro! Título não pode ser vazio");
                         }
                     }
-                    else {
-                        System.out.println("Erro! Título não pode ser vazio");
-                    }
+                }
+                else {
+                    System.out.println("Não há registros de tarefas.");
                 }
             }
 
