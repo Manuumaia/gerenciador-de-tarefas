@@ -12,10 +12,11 @@ public class Tarefa {
     private LocalDate data_limite;
     private boolean status;
 
-    public Tarefa(String titulo, String descricao) {
+    public Tarefa(String titulo, String descricao, LocalDate data_limite) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.data_criacao = LocalDate.now();
+        this.data_limite = data_limite;
         this.status = false;
     }
 
@@ -189,9 +190,12 @@ public class Tarefa {
         return this.data_limite;
     }
 
-    public void setDataLimite(String data_limite) {
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        this.data_limite = LocalDate.parse(data_limite, formato);
+    public void setDataLimite(LocalDate data_limite) {
+        this.data_limite = data_limite;
+    }
+
+    public boolean verificarDataLimite(LocalDate data) {
+        return data.isBefore(this.getData_criacao());
     }
 
     public boolean getStatus() {
@@ -272,29 +276,40 @@ public class Tarefa {
         }
 
         else if (atributo == 3) {
-            System.out.println("Digite a nova data limite (dd/MM/yyyy):");
-            String nova_data = input.nextLine();
+            boolean loop = true;
 
-            if (Utilidades.isDate(nova_data)) {
-                while (true) {
-                    System.out.println("Tem certeza que deseja alterar a data limite desta tarefa? (s/n)");
-                    String confirmacao = input.next().toLowerCase();
+            while (loop) {
+                System.out.println("Digite a nova data limite (dd/MM/yyyy):");
+                String nova_dataStr = input.nextLine();
 
-                    if (confirmacao.equals("s")) {
-                        setDataLimite(nova_data);
-                        break;
-                    }
-                    else if (confirmacao.equals("n")) {
-                        break;
+                if (Utilidades.isDate(nova_dataStr)) {
+                    LocalDate nova_data = Utilidades.toDate(nova_dataStr);
+
+                    if (this.verificarDataLimite(nova_data)) {
+                        System.out.println("Erro! Data limite não pode ser antes da data de criação.\n");
                     }
                     else {
-                        System.out.println("Comando inválido");
-                        break;
+                        while (loop) {
+                            System.out.println("Tem certeza que deseja alterar a data limite desta tarefa? (s/n)");
+                            String confirmacao = input.next().toLowerCase();
+
+                            if (confirmacao.equals("s")) {
+                                setDataLimite(nova_data);
+                                loop = false;
+                            }
+                            else if (confirmacao.equals("n")) {
+                                loop = false;
+                            }
+                            else {
+                                System.out.println("Comando inválido");
+                                loop = false;
+                            }
+                        }
                     }
                 }
-            }
-            else {
-                System.out.println("Erro! Data inválida");
+                else {
+                    System.out.println("Erro! Data inválida");
+                }
             }
         }
 

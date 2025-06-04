@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class Main {
             input.nextLine();
 
             if (opcao == 1) {
-                String titulo, descricao, data;
+                String titulo, descricao, dataStr;
                 boolean loop = true;
 
                 while (loop) {
@@ -30,13 +31,19 @@ public class Main {
                             if (!descricao.isEmpty()) {
                                 while (loop) {
                                     System.out.println("Informe a data limite (dd/MM/yyyy):");
-                                    data = input.nextLine();
+                                    dataStr = input.nextLine();
 
-                                    if (Utilidades.isDate(data)) {
-                                        Tarefa nova_tarefa = new Tarefa(titulo, descricao);
-                                        nova_tarefa.setDataLimite(data);
-                                        nova_tarefa.cadastrarTarefa();
-                                        loop = false;
+                                    if (Utilidades.isDate(dataStr)) {
+                                        LocalDate data = Utilidades.toDate(dataStr);
+                                        Tarefa nova_tarefa = new Tarefa(titulo, descricao, data);
+
+                                        if (nova_tarefa.verificarDataLimite(nova_tarefa.getData_limite())) {
+                                            System.out.println("Erro! Data limite não pode ser antes da data de criação.\n");
+                                        }
+                                        else {
+                                            nova_tarefa.cadastrarTarefa();
+                                            loop = false;
+                                        }
                                     }
                                     else {
                                         System.out.println("Erro! Data inválida");
